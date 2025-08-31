@@ -1,12 +1,15 @@
+# 🏙️ Urban Explorer API
 
-
-# 🏙️ Urban Explorer
+[](https://www.python.org/)
+[](https://fastapi.tiangolo.com/)
+[](https://www.google.com/search?q=./LICENSE)
 
 一个基于 AI 的城市漫游任务生成器后端服务。厌倦了千篇一律的旅游攻略？Urban Explorer 利用 Google Gemini 的强大能力，为任意城市或地点动态生成独特、有趣且富有创意的探索任务，帮助你像玩游戏一样重新发现身边的世界。
 
 ## ✨ 核心功能
 
   - **动态任务生成**: 输入任意地点，即可获得一份独一无二的探索任务列表。
+  - **多种探索主题**: 支持“默认”、“文艺青年”、“吃货”和“摄影师”等多种模式，生成风格各异的任务。
   - **创意任务类型**: 任务涵盖观察、互动、创作、美食、感受等多个维度，告别无聊的观光打卡。
   - **结构化JSON输出**: API返回格式稳定、清晰的JSON数据，极易与前端应用集成。
   - **安全的密钥管理**: API密钥通过环境变量进行管理，不会暴露在代码中。
@@ -16,9 +19,9 @@
 
 本项目采用基于FastAPI的无服务器（Serverless-ready）架构，数据流如下：
 
-`用户前端 -> Urban Explorer (FastAPI) -> Google Gemini API -> Urban Explorer -> 用户前端`
+`用户前端 -> Urban Explorer API (FastAPI) -> Google Gemini API -> Urban Explorer API -> 用户前端`
 
-1.  前端向本API服务发起一个带有地点的 `POST` 请求。
+1.  前端向本API服务发起一个带有地点和可选主题的 `POST` 请求。
 2.  FastAPI后端接收请求，并使用安全存储的API密钥构造一个精心设计的Prompt。
 3.  后端调用 Google Gemini API。
 4.  Gemini返回生成的任务列表（文本格式）。
@@ -86,7 +89,7 @@ GEMINI_API_KEY="YOUR_API_KEY_HERE"
 uvicorn main:app --reload
 ```
 
-服务器将在 `http://127.0.0.1:8000` 启动。`--reload` 参数会使服务器在你修改代码后自动重启。
+服务器将在 `http://127.0.0.1:8000` 启动。
 
 ## 📖 API 使用说明
 
@@ -94,63 +97,80 @@ uvicorn main:app --reload
 
 ### a. 交互式文档 (推荐)
 
-FastAPI 会自动生成交互式文档，这是测试API的最佳方式。
+FastAPI 会自动生成交互式文档，这是测试API的最佳方式。访问时，你会看到新增的 `theme` 字段及其可选值。
 
   - **Swagger UI:** [http://127.0.0.1:8000/docs](https://www.google.com/search?q=http://127.0.0.1:8000/docs)
   - **ReDoc:** [http://127.0.0.1:8000/redoc](https://www.google.com/search?q=http://127.0.0.1:8000/redoc)
 
-在文档页面，你可以直接对 `/api/v1/generate-quest` 端点发起测试请求。
-
 ### b. 使用 cURL
 
 你也可以使用 cURL 或任何其他API客户端（如 Postman、Insomnia）来测试。
+
+#### 默认模式请求
+
+如果不提供 `theme` 参数，将使用默认模式。
 
 **请求示例:**
 
 ```bash
 curl -X 'POST' \
   'http://127.0.0.1:8000/api/v1/generate-quest' \
-  -H 'accept: application/json' \
   -H 'Content-Type: application/json' \
   -d '{
   "location": "南京"
 }'
 ```
 
-**成功响应示例:**
+#### 指定主题请求
+
+在请求体中加入 `theme` 参数来获取特定风格的任务。
+
+**请求示例 (摄影师模式):**
+
+```bash
+curl -X 'POST' \
+  'http://127.0.0.1:8000/api/v1/generate-quest' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "location": "南京",
+  "theme": "摄影师模式"
+}'
+```
+
+**成功响应示例 (摄影师模式):**
 
 ```json
 {
   "tasks": [
     {
-      "category": "感受",
-      "icon": "🎧",
-      "title": "梧桐细语",
-      "description": "走在一条种满法国梧桐的安静街道上，闭上眼，聆听风吹过树叶的声音一分钟。"
-    },
-    {
-      "category": "美食",
-      "icon": "🍜",
-      "title": "面馆奇遇",
-      "description": "找到一家本地人排队最多的小面馆，点一碗你从未听说过的面条。"
-    },
-    {
       "category": "观察",
       "icon": "👁️",
-      "title": "城墙印记",
-      "description": "在明城墙的砖块上，寻找并拍下三个你觉得最有趣或最古老的铭文。"
-    },
-    {
-      "category": "互动",
-      "icon": "💬",
-      "title": "方言一句",
-      "description": "向一位和善的本地店主请教一句南京方言，并尝试用它来买一样东西。"
+      "title": "梧桐光影",
+      "description": "寻找一条颐和路上的小巷，在午后时分，捕捉法国梧桐树影斑驳投在墙上的瞬间。"
     },
     {
       "category": "创作",
       "icon": "🎨",
-      "title": "秦淮速写",
-      "description": "在秦淮河边，用手机或纸笔，花五分钟时间快速画下河上的一艘船或一盏灯。"
+      "title": "秦淮倒影",
+      "description": "在夜晚的秦淮河边，尝试用长曝光模式拍摄一张船灯在水面拉出的光轨。"
+    },
+    {
+      "category": "感受",
+      "icon": "🎧",
+      "title": "老门东的质感",
+      "description": "在老门东，拍摄一组以“纹理”为主题的特写照片，例如旧木门、城墙砖、布幌子。"
+    },
+    {
+      "category": "互动",
+      "icon": "💬",
+      "title": "街头烟火气",
+      "description": "在一家路边小吃摊，征得摊主同意后，拍一张TA制作食物时最专注的肖像照。"
+    },
+    {
+      "category": "美食",
+      "icon": "🍜",
+      "title": "一碗面的故事",
+      "description": "找到一碗南京皮肚面，在吃之前，为它拍一张色彩鲜明、充满诱惑力的“定妆照”。"
     }
   ]
 }
@@ -159,7 +179,7 @@ curl -X 'POST' \
 ## 🔮 未来计划
 
   - [ ]  增加缓存机制，对同一地点的请求在短时间内返回相同结果，降低API调用成本。
-  - [ ]  支持更多自定义选项，如任务数量、探索主题（例如“历史”、“美食”、“艺术”）。
+  - [ ]  增加更多探索主题（如“历史爱好者”、“建筑迷”），并允许用户自定义主题。
   - [ ]  增加多语言支持。
   - [ ]  将项目打包成 Docker 容器，方便部署。
 
