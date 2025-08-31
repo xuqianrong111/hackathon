@@ -1,0 +1,1205 @@
+/* 全局主题样式 */
+
+/* 导入Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;700&family=Source+Code+Pro:wght@400;500;600&family=Inconsolata:wght@400;500&family=Press+Start+2P&display=swap');
+
+/* 基础CSS变量定义 */
+:root {
+  /* 默认主题变量 */
+  --color-primary: #8B4513;
+  --color-secondary: #D2691E;
+  --color-accent: #CD853F;
+  --color-background: #F5E6D3;
+  --color-surface: #FFF8DC;
+  --color-text: #2F1B14;
+  --color-textSecondary: #8B4513;
+  --color-border: #D2691E;
+  --color-success: #228B22;
+  --color-warning: #FF8C00;
+  --color-error: #DC143C;
+  
+  --font-primary: "Crimson Text", serif;
+  --font-secondary: "Playfair Display", serif;
+  --font-mono: "Courier New", monospace;
+  
+  --effect-blur: blur(2px);
+  --effect-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+  --effect-glow: 0 0 10px rgba(205, 133, 63, 0.5);
+}
+
+/* 复古探险家主题 */
+[data-theme="vintage"] {
+  --color-primary: #8B4513;
+  --color-secondary: #D2691E;
+  --color-accent: #CD853F;
+  --color-background: #F5E6D3;
+  --color-surface: #FFF8DC;
+  --color-text: #2F1B14;
+  --color-textSecondary: #8B4513;
+  --color-border: #D2691E;
+  --color-success: #228B22;
+  --color-warning: #FF8C00;
+  --color-error: #DC143C;
+  
+  --font-primary: "Crimson Text", serif;
+  --font-secondary: "Playfair Display", serif;
+  --font-mono: "Courier New", monospace;
+  
+  --effect-blur: blur(2px);
+  --effect-shadow: 0 4px 8px rgba(139, 69, 19, 0.3);
+  --effect-glow: 0 0 10px rgba(205, 133, 63, 0.5);
+  
+  --transition-duration: 0.3s;
+  
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+}
+
+.theme-vintage {
+  --transition-duration: 0.3s;
+}
+
+.theme-vintage .vintage-paper {
+  background: linear-gradient(45deg, #F5E6D3 0%, #FFF8DC 50%, #F5E6D3 100%);
+  background-size: 20px 20px;
+}
+
+.theme-vintage .wax-seal {
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-vintage .wax-seal::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(139, 69, 19, 0.1) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: all var(--transition-duration) ease;
+}
+
+.theme-vintage .wax-seal:hover::before {
+  width: 120%;
+  height: 120%;
+}
+
+/* 神秘特工档案主题 - 优化版 */
+[data-theme="agent"] {
+  --color-primary: #00a085;
+  --color-secondary: #cc1f56;
+  --color-accent: #0088bb;
+  --color-background: #050a0f;
+  --color-surface: #0a1015;
+  --color-surface-elevated: #0f1520;
+  --color-text: #00a085;
+  --color-text-secondary: #4a9eff;
+  --color-text-muted: #4a5568;
+  --color-border: #00a085;
+  --color-success: #00a085;
+  --color-warning: #d69e2e;
+  --color-error: #cc1f56;
+  --color-info: #0088bb;
+  
+  --font-primary: 'Source Code Pro', 'Inconsolata', 'Courier New', monospace;
+  --font-secondary: 'Source Code Pro', 'Inconsolata', 'Courier New', monospace;
+  
+  --effect-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  --effect-glow: 0 0 10px rgba(0, 255, 0, 0.5);
+  --effect-terminal-glow: 0 0 5px rgba(0, 255, 0, 0.8);
+  
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  
+  /* 现代化终端效果 */
+  background-image: 
+    radial-gradient(ellipse at center, rgba(0, 160, 133, 0.05) 0%, transparent 80%),
+    linear-gradient(90deg, transparent 99%, rgba(0, 160, 133, 0.02) 100%),
+    linear-gradient(180deg, transparent 99%, rgba(0, 160, 133, 0.01) 100%),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 160, 133, 0.008) 3px, rgba(0, 160, 133, 0.008) 6px);
+  background-size: 100% 100%, 4px 4px, 100% 4px, 100% 6px;
+  animation: terminalScan 4s ease-in-out infinite;
+}
+
+/* 神秘特工档案主题专用样式 */
+[data-theme="agent"] .screen-flicker {
+  animation: screenFlicker 0.15s infinite linear alternate;
+}
+
+[data-theme="agent"] .terminal-blink {
+  animation: terminalBlink 1s infinite;
+}
+
+[data-theme="agent"] .typewriter {
+  border-right: 2px solid #00ff00;
+  animation: typewriterCursor 1s infinite;
+}
+
+[data-theme="agent"] .radar-scan {
+  position: relative;
+  border: 2px solid #00ff00;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 0, 0.1) 0%, transparent 70%);
+}
+
+[data-theme="agent"] .radar-scan::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(to bottom, #00ff00, transparent);
+  transform-origin: bottom;
+  transform: translate(-50%, -100%) rotate(0deg);
+  animation: radarSweep 2s infinite linear;
+}
+
+[data-theme="agent"] .matrix-rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+[data-theme="agent"] .agent-button {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border: 2px solid var(--color-accent);
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 160, 133, 0.2), inset 0 0 15px rgba(0, 160, 133, 0.08);
+  transition: all 0.3s ease;
+}
+
+[data-theme="agent"] .agent-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(1, 180, 228, 0.4), transparent);
+  transition: left 0.4s ease;
+}
+
+[data-theme="agent"] .agent-button::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--color-accent), var(--color-primary), var(--color-secondary), var(--color-accent));
+  background-size: 400% 400%;
+  z-index: -1;
+  animation: agentButtonGlow 2s ease-in-out infinite;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="agent"] .agent-button:hover {
+  box-shadow: 0 0 25px rgba(0, 160, 133, 0.4), inset 0 0 25px rgba(0, 160, 133, 0.15);
+  transform: translateY(-2px);
+}
+
+/* 任务生成界面样式 */
+[data-theme="agent"] .agent-terminal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+[data-theme="agent"] .terminal-window {
+  background: rgba(0, 20, 10, 0.95);
+  border: 1px solid var(--color-accent);
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 255, 127, 0.2);
+  overflow: hidden;
+}
+
+[data-theme="agent"] .terminal-header {
+  background: linear-gradient(135deg, #0a2a1a, #1a3a2a);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-accent);
+}
+
+[data-theme="agent"] .terminal-controls {
+  display: flex;
+  gap: 8px;
+}
+
+[data-theme="agent"] .control-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+[data-theme="agent"] .control-dot.red {
+  background: #ff5f56;
+}
+
+[data-theme="agent"] .control-dot.yellow {
+  background: #ffbd2e;
+}
+
+[data-theme="agent"] .control-dot.green {
+  background: #27ca3f;
+}
+
+[data-theme="agent"] .terminal-title {
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+[data-theme="agent"] .terminal-content {
+  padding: 20px;
+  font-family: 'Courier New', monospace;
+}
+
+[data-theme="agent"] .command-line {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+[data-theme="agent"] .prompt {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+[data-theme="agent"] .command {
+  color: var(--color-text);
+}
+
+[data-theme="agent"] .terminal-output {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(0, 255, 127, 0.05);
+  border-left: 3px solid var(--color-accent);
+}
+
+[data-theme="agent"] .status-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+[data-theme="agent"] .status-indicator {
+  font-size: 12px;
+}
+
+[data-theme="agent"] .status-indicator.success {
+  color: #27ca3f;
+}
+
+[data-theme="agent"] .status-indicator.warning {
+  color: #ffbd2e;
+}
+
+[data-theme="agent"] .mission-form {
+  margin-top: 20px;
+}
+
+[data-theme="agent"] .form-section {
+  margin-bottom: 20px;
+}
+
+[data-theme="agent"] .terminal-input,
+[data-theme="agent"] .terminal-select {
+  width: 100%;
+  background: rgba(0, 20, 10, 0.8);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 12px 16px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+[data-theme="agent"] .terminal-input:focus,
+[data-theme="agent"] .terminal-select:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.3);
+}
+
+[data-theme="agent"] .terminal-input::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+[data-theme="agent"] .terminal-button {
+  background: linear-gradient(135deg, #0a2a1a, #1a3a2a);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text);
+  padding: 12px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+[data-theme="agent"] .terminal-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #1a4a3a, #2d5a4a);
+  box-shadow: 0 0 15px rgba(0, 255, 127, 0.4);
+  transform: translateY(-1px);
+}
+
+[data-theme="agent"] .terminal-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+[data-theme="agent"] .terminal-button.secondary {
+  background: rgba(0, 20, 10, 0.5);
+  border-color: var(--color-border);
+}
+
+[data-theme="agent"] .terminal-button.primary {
+  background: linear-gradient(135deg, #1a4a3a, #2d5a4a);
+  box-shadow: 0 0 10px rgba(0, 255, 127, 0.2);
+}
+
+[data-theme="agent"] .loading-spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+[data-theme="agent"] .mission-generation {
+  margin-top: 30px;
+  padding: 20px;
+  background: rgba(0, 255, 127, 0.05);
+  border: 1px solid var(--color-accent);
+  border-radius: 4px;
+}
+
+[data-theme="agent"] .status-text {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+[data-theme="agent"] .progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 255, 127, 0.2);
+  border-radius: 2px;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+[data-theme="agent"] .progress-fill {
+  height: 100%;
+  background: var(--color-accent);
+  width: 0;
+  animation: progress 3s ease-in-out infinite;
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  50% { width: 70%; }
+  100% { width: 100%; }
+}
+
+[data-theme="agent"] .generation-steps {
+  margin-top: 20px;
+}
+
+[data-theme="agent"] .step {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="agent"] .step.active {
+  opacity: 1;
+}
+
+[data-theme="agent"] .step-indicator {
+  color: var(--color-accent);
+  font-size: 12px;
+}
+
+[data-theme="agent"] .advanced-options {
+  margin-top: 20px;
+  padding: 20px;
+  background: rgba(0, 255, 127, 0.03);
+  border: 1px solid rgba(0, 255, 127, 0.2);
+  border-radius: 4px;
+}
+
+[data-theme="agent"] .agent-button:hover::before {
+  left: 100%;
+}
+
+[data-theme="agent"] .agent-button:hover::after {
+  opacity: 1;
+}
+
+[data-theme="agent"] .terminal-window {
+  background: #000000;
+  border: 2px solid #00ff00;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.3),
+    inset 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+[data-theme="agent"] .terminal-header {
+  background: #1a1a1a;
+  border-bottom: 1px solid #00ff00;
+  padding: 8px 16px;
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme="agent"] .status-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+[data-theme="agent"] .status-online {
+  background: #00ff00;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+[data-theme="agent"] .status-offline {
+  background: #ff0000;
+  box-shadow: 0 0 10px #ff0000;
+}
+
+[data-theme="agent"] .command-prompt {
+  color: #00ff00;
+  margin-right: 8px;
+}
+
+[data-theme="agent"] .command-prompt::before {
+  content: '> ';
+}
+
+[data-theme="agent"] .classified-stamp {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #ff0000;
+  color: white;
+  padding: 8px 16px;
+  transform: rotate(15deg);
+  border: 3px solid #ff0000;
+  font-weight: bold;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+[data-theme="agent"] .morse-code {
+  font-family: monospace;
+  letter-spacing: 4px;
+  animation: morseFlash 2s infinite;
+}
+
+[data-theme="agent"] .objective-tag {
+  background: #1a1a1a;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-right: 8px;
+}
+
+[data-theme="agent"] .accomplished-tag {
+  background: #004400;
+  border: 1px solid #00ff00;
+  color: #00ff00;
+  text-decoration: line-through;
+}
+
+.theme-agent {
+  --transition-duration: 0.1s;
+  background: #000000;
+  color: #00FF00;
+  font-family: var(--font-primary);
+}
+
+.theme-agent * {
+  font-family: var(--font-primary) !important;
+}
+
+/* 终端闪烁效果 */
+.theme-agent .terminal-blink {
+  animation: terminalBlink 1s infinite;
+}
+
+@keyframes terminalBlink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* 屏幕闪烁效果 */
+.theme-agent .screen-flicker {
+  animation: screenFlicker 0.15s infinite linear alternate;
+}
+
+@keyframes screenFlicker {
+  0% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  100% {
+    opacity: 0.98;
+    filter: brightness(1.02) contrast(1.01);
+  }
+}
+
+/* 打字机效果 */
+.theme-agent .typewriter {
+  overflow: hidden;
+  border-right: 2px solid #00FF00;
+  white-space: nowrap;
+  animation: typewriter 2s steps(40, end), blinkCursor 0.75s step-end infinite;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkCursor {
+  from, to { border-color: transparent; }
+  50% { border-color: #00FF00; }
+}
+
+/* 终端输入框样式 */
+.theme-agent .terminal-input {
+  background: transparent;
+  border: 1px solid #00FF00;
+  color: #00FF00;
+  font-family: var(--font-primary);
+  padding: 8px 12px;
+  position: relative;
+}
+
+.theme-agent .terminal-input::before {
+  content: '> ';
+  color: #00FF00;
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.theme-agent .terminal-input input {
+  background: transparent;
+  border: none;
+  color: #00FF00;
+  font-family: var(--font-primary);
+  padding-left: 20px;
+  outline: none;
+}
+
+/* 雷达扫描动画 */
+.theme-agent .radar-scan {
+  position: relative;
+  border-radius: 50%;
+  border: 2px solid #00FF00;
+  overflow: hidden;
+}
+
+.theme-agent .radar-scan::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 50%;
+  background: linear-gradient(to bottom, #00FF00, transparent);
+  transform-origin: bottom center;
+  transform: translate(-50%, -100%) rotate(0deg);
+  animation: radarSweep 2s linear infinite;
+}
+
+@keyframes radarSweep {
+  0% { transform: translate(-50%, -100%) rotate(0deg); }
+  100% { transform: translate(-50%, -100%) rotate(360deg); }
+}
+
+@keyframes terminalScan {
+  0%, 100% { background-position: 0 0, 0 0, 0 0, 0 0; }
+  50% { background-position: 0 0, 100% 100%, 0 100%, 0 100%; }
+}
+
+@keyframes agentButtonGlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* 像素游戏RPG主题 - 优化版 */
+[data-theme="pixel"] {
+  --color-primary: #ff6b35;
+  --color-secondary: #004e89;
+  --color-accent: #ffd23f;
+  --color-background: #1a1a2e;
+  --color-surface: #16213e;
+  --color-surface-elevated: #0f3460;
+  --color-text: #eee5e9;
+  --color-text-secondary: #c3a6ff;
+  --color-text-muted: #7209b7;
+  --color-border: #ff6b35;
+  --color-success: #06ffa5;
+  --color-warning: #ffd23f;
+  --color-error: #ff073a;
+  --color-info: #40e0d0;
+  --color-gold: #ffd700;
+  --color-silver: #c0c0c0;
+  --color-bronze: #cd7f32;
+  
+  --font-primary: 'Press Start 2P', 'Courier New', monospace;
+  --font-secondary: 'Press Start 2P', 'Courier New', monospace;
+  
+  --effect-shadow: 4px 4px 0px rgba(0, 0, 0, 0.5);
+  --effect-glow: 0 0 10px rgba(59, 130, 246, 0.5);
+  --effect-pixel-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+  
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+  font-size: 12px;
+  
+  /* 现代化像素网格背景 */
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 210, 63, 0.08) 0%, transparent 50%),
+    linear-gradient(rgba(255, 107, 53, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 107, 53, 0.05) 1px, transparent 1px);
+  background-size: 200px 200px, 150px 150px, 16px 16px, 16px 16px;
+  background-position: 0 0, 100px 100px, 0 0, 0 0;
+  animation: pixelBackgroundShift 20s ease-in-out infinite;
+}
+
+/* 像素游戏RPG主题专用样式 */
+[data-theme="pixel"] .pixel-border {
+  border-style: solid;
+  border-image: 
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12"><rect width="12" height="12" fill="none" stroke="white" stroke-width="2"/></svg>') 2;
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .font-pixel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .pixel-button {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  border: 3px solid var(--color-accent);
+  color: var(--color-text);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 107, 53, 0.3);
+  image-rendering: pixelated;
+  transition: all 0.1s ease;
+  overflow: hidden;
+}
+
+[data-theme="pixel"] .pixel-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 210, 63, 0.2) 50%, transparent 70%);
+  transform: rotate(45deg) translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+[data-theme="pixel"] .pixel-button:hover {
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-primary) 100%);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 210, 63, 0.5);
+}
+
+[data-theme="pixel"] .pixel-button:hover::before {
+  transform: rotate(45deg) translateX(100%);
+}
+
+[data-theme="pixel"] .pixel-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+[data-theme="pixel"] .pixel-dialog {
+  background: #1e40af;
+  border: 4px solid #ffffff;
+  box-shadow: 
+    4px 4px 0px rgba(0, 0, 0, 0.8),
+    inset 2px 2px 0px rgba(255, 255, 255, 0.3);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .pixel-scroll {
+  background: linear-gradient(180deg, #fef3c7 0%, #fbbf24 100%);
+  border: 3px solid #92400e;
+  box-shadow: 
+    3px 3px 0px rgba(0, 0, 0, 0.6),
+    inset 1px 1px 0px rgba(255, 255, 255, 0.5);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .pixel-input {
+  background: #ffffff;
+  border: 2px solid #374151;
+  color: #000000;
+  box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.2);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .pixel-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 
+    inset 2px 2px 0px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(59, 130, 246, 0.5);
+}
+
+[data-theme="pixel"] .health-bar {
+  background: #374151;
+  border: 2px solid #ffffff;
+  height: 16px;
+  position: relative;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .health-bar-fill {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+[data-theme="pixel"] .health-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.3) 2px,
+    rgba(255, 255, 255, 0.3) 4px
+  );
+}
+
+[data-theme="pixel"] .exp-bar {
+  background: #374151;
+  border: 2px solid #ffffff;
+  height: 12px;
+  position: relative;
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .exp-bar-fill {
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%);
+  height: 100%;
+  transition: width 0.5s ease;
+}
+
+[data-theme="pixel"] .coin-counter {
+  background: #fbbf24;
+  border: 2px solid #92400e;
+  color: #92400e;
+  padding: 4px 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .level-badge {
+  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+  border: 2px solid #ffffff;
+  color: white;
+  padding: 4px 8px;
+  font-weight: bold;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .achievement-star {
+  background: linear-gradient(45deg, #fbbf24, #f59e0b);
+  border: 2px solid #ffffff;
+  width: 24px;
+  height: 24px;
+  position: relative;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .achievement-star::before {
+  content: '★';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+}
+
+[data-theme="pixel"] .quest-item {
+  background: #f3f4f6;
+  border: 2px solid #6b7280;
+  color: #374151;
+  margin-bottom: 8px;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .quest-item.completed {
+  background: #d1fae5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+[data-theme="pixel"] .quest-item.completed::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #10b981;
+  color: white;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  border: 2px solid #ffffff;
+}
+
+[data-theme="pixel"] .pixel-runner {
+  animation: pixelRun 0.4s infinite;
+}
+
+[data-theme="pixel"] .treasure-chest {
+  background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%);
+  border: 3px solid #92400e;
+  width: 48px;
+  height: 36px;
+  position: relative;
+  box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.6);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .treasure-chest::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 8px;
+  background: #92400e;
+  border: 2px solid #92400e;
+}
+
+[data-theme="pixel"] .treasure-chest.shaking {
+  animation: treasureShake 0.5s infinite;
+}
+
+[data-theme="pixel"] .status-bar {
+  background: #1e40af;
+  border: 2px solid #ffffff;
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .mini-map {
+  background: #374151;
+  border: 2px solid #ffffff;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6);
+  image-rendering: pixelated;
+}
+
+[data-theme="pixel"] .mini-map::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  background: #ef4444;
+  transform: translate(-50%, -50%);
+  animation: mapPulse 1s infinite;
+}
+
+/* 像素游戏RPG主题动画 */
+@keyframes pixelRun {
+  0%, 50% { transform: translateY(0px); }
+  25% { transform: translateY(-2px); }
+  75% { transform: translateY(2px); }
+}
+
+@keyframes treasureShake {
+  0%, 100% { transform: translateX(0px); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+@keyframes mapPulse {
+  0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.5); }
+}
+
+@keyframes pixelGlow {
+  0%, 100% { box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6); }
+  50% { box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.6), 0 0 10px rgba(59, 130, 246, 0.8); }
+}
+
+@keyframes coinSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+@keyframes levelUp {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.theme-pixel {
+  --transition-duration: 0.2s;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.theme-pixel * {
+  font-family: var(--font-primary) !important;
+  font-size: clamp(8px, 1vw, 14px);
+  line-height: 1.4;
+}
+
+/* 像素按钮样式 */
+.theme-pixel .pixel-button {
+  background: var(--color-primary);
+  border: 3px solid #FFFFFF;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.8);
+  color: #FFFFFF;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  padding: 8px 16px;
+  position: relative;
+  text-transform: uppercase;
+  transition: none;
+}
+
+.theme-pixel .pixel-button:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.8);
+}
+
+.theme-pixel .pixel-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* 8-bit小人跑步动画 */
+.theme-pixel .pixel-runner {
+  width: 32px;
+  height: 32px;
+  background: var(--color-primary);
+  position: relative;
+  animation: pixelRun 0.5s steps(2, end) infinite;
+}
+
+@keyframes pixelRun {
+  0% { background-position: 0px 0px; }
+  100% { background-position: -32px 0px; }
+}
+
+/* 像素宝箱动画 */
+.theme-pixel .pixel-chest {
+  width: 24px;
+  height: 24px;
+  background: var(--color-secondary);
+  border: 2px solid #FFFFFF;
+  position: relative;
+  animation: pixelChestShake 1s ease-in-out infinite;
+}
+
+@keyframes pixelChestShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-2px); }
+  75% { transform: translateX(2px); }
+}
+
+/* RPG对话框样式 */
+.theme-pixel .rpg-dialog {
+  background: var(--color-surface);
+  border: 4px solid #FFFFFF;
+  box-shadow: inset -4px -4px 0px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  position: relative;
+}
+
+.theme-pixel .rpg-dialog::before {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--color-surface);
+}
+
+/* 任务卷轴样式 */
+.theme-pixel .quest-scroll {
+  background: linear-gradient(45deg, var(--color-surface) 0%, var(--color-background) 50%, var(--color-surface) 100%);
+  border: 4px solid var(--color-border);
+  border-radius: 8px;
+  box-shadow: var(--effect-shadow);
+  position: relative;
+}
+
+.theme-pixel .quest-scroll::before,
+.theme-pixel .quest-scroll::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  width: 8px;
+  height: calc(100% + 8px);
+  background: var(--color-accent);
+  border: 2px solid var(--color-border);
+}
+
+.theme-pixel .quest-scroll::before {
+  left: -12px;
+}
+
+.theme-pixel .quest-scroll::after {
+  right: -12px;
+}
+
+/* 像素星星完成标记 */
+.theme-pixel .pixel-star {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: var(--color-warning);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  animation: pixelStarTwinkle 1s ease-in-out infinite alternate;
+}
+
+@keyframes pixelStarTwinkle {
+  0% { transform: scale(1) rotate(0deg); }
+  100% { transform: scale(1.2) rotate(5deg); }
+}
+
+@keyframes pixelBackgroundShift {
+  0%, 100% { background-position: 0 0, 100px 100px, 0 0, 0 0; }
+  25% { background-position: 50px 0, 150px 100px, 4px 0, 0 4px; }
+  50% { background-position: 100px 50px, 200px 150px, 8px 4px, 4px 8px; }
+  75% { background-position: 50px 100px, 150px 200px, 4px 8px, 8px 4px; }
+}
+
+/* 通用动画效果 */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .theme-pixel * {
+    font-size: clamp(6px, 2vw, 12px);
+  }
+  
+  .theme-pixel .pixel-button {
+    padding: 6px 12px;
+    font-size: 10px;
+  }
+}
+
+/* 主题切换过渡效果 */
+* {
+  transition: background-color var(--transition-duration, 0.3s) ease,
+              color var(--transition-duration, 0.3s) ease,
+              border-color var(--transition-duration, 0.3s) ease,
+              box-shadow var(--transition-duration, 0.3s) ease;
+}
