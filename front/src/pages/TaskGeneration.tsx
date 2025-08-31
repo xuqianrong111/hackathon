@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom';
 import { 
   MapPin, 
   Compass, 
@@ -9,6 +10,7 @@ import {
   Users,
   Sparkles,
   ArrowRight,
+  ArrowLeft,
   Clock,
   Target,
   Star,
@@ -27,6 +29,7 @@ import { PixelDialog, PixelButton, PixelInput } from '../components/PixelCompone
  */
 export default function TaskGeneration() {
   const { currentTheme, setTheme } = useTheme();
+  const navigate = useNavigate();
   const [location, setLocation] = useState('');
   const [selectedTheme, setSelectedTheme] = useState('');
   const [duration, setDuration] = useState('2');
@@ -74,6 +77,19 @@ export default function TaskGeneration() {
   ];
 
   /**
+   * 将前端主题ID映射到后端API期望的主题名称
+   */
+  const mapThemeToApiTheme = (themeId: string): string => {
+    const themeMap: { [key: string]: string } = {
+      'artistic': '文艺青年模式',
+      'foodie': '美食探索者模式', 
+      'photographer': '摄影师模式',
+      'social': '社交达人模式'
+    };
+    return themeMap[themeId] || '默认模式';
+  };
+
+  /**
    * 处理任务生成
    */
   const handleGenerateTask = async () => {
@@ -84,12 +100,44 @@ export default function TaskGeneration() {
 
     setIsGenerating(true);
     
-    // 模拟API调用
-    setTimeout(() => {
+    try {
+      // 调用真实的后端API
+      const response = await fetch('http://localhost:8000/api/v1/generate-quest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          location: location,
+          theme: mapThemeToApiTheme(selectedTheme)
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('生成的任务:', data);
+      
+      // 将任务数据存储到sessionStorage中，然后跳转到任务详情页面
+      const sessionId = Date.now().toString();
+      sessionStorage.setItem(`tasks_${sessionId}`, JSON.stringify({
+        location,
+        theme: selectedTheme,
+        tasks: data.tasks,
+        generatedAt: new Date().toISOString()
+      }));
+      
+      // 跳转到任务详情页面
+      navigate(`/tasks/${sessionId}`);
+      
+    } catch (error) {
+      console.error('生成任务失败:', error);
+      alert('生成任务失败，请检查网络连接或稍后重试');
+    } finally {
       setIsGenerating(false);
-      // 这里应该跳转到任务详情页面
-      console.log('生成任务:', { location, selectedTheme, duration, difficulty });
-    }, 3000);
+    }
   };
 
   /**
@@ -114,6 +162,12 @@ export default function TaskGeneration() {
               <div className="terminal-title">CLASSIFIED MISSION GENERATOR v2.1</div>
             </div>
             <div className="terminal-content">
+              <div className="command-line">
+                <span className="prompt">AGENT@HEADQUARTERS:~$</span>
+                <Link to="/" className="command hover:text-yellow-400 transition-colors">
+                  ← return_to_base
+                </Link>
+              </div>
               <div className="command-line">
                 <span className="prompt">AGENT@HEADQUARTERS:~$</span>
                 <span className="command">initialize_mission_parameters</span>
@@ -266,6 +320,15 @@ export default function TaskGeneration() {
           className="max-w-2xl mx-auto"
         >
             <div className="space-y-6">
+              {/* 返回按钮 */}
+              <div className="flex justify-start">
+                <Link to="/">
+                  <PixelButton variant="secondary" className="text-xs px-3 py-2">
+                    <ArrowLeft className="w-3 h-3 mr-1" />
+                    返回首页
+                  </PixelButton>
+                </Link>
+              </div>
               <div>
                 <label className="block text-white mb-2 text-sm">
                   🗺️ 探索地点
@@ -326,6 +389,27 @@ export default function TaskGeneration() {
   return (
     <div className="min-h-screen px-4 py-8 md:px-8" style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-text)' }}>
       <div className="max-w-4xl mx-auto">
+        {/* 返回按钮 */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <Link 
+            to="/" 
+            className="inline-flex items-center px-4 py-2 rounded-lg transition-all duration-300 hover:shadow-lg"
+            style={{ 
+              backgroundColor: 'var(--color-card)', 
+              color: 'var(--color-text)',
+              border: '2px solid var(--color-primary)'
+            }}
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            返回首页
+          </Link>
+        </motion.div>
+        
         {/* 页面标题 */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
